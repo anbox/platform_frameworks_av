@@ -8,7 +8,11 @@ LOCAL_SHARED_LIBRARIES := libmedia libstagefright libbinder libutils liblog
 
 LOCAL_MODULE:= libresourcemanagerservice
 
-LOCAL_32_BIT_ONLY := true
+ifeq ($(strip $(MEDIASERVER_MULTILIB)),)
+LOCAL_MULTILIB := 32
+else
+LOCAL_MULTILIB := $(MEDIASERVER_MULTILIB)
+endif
 
 LOCAL_C_INCLUDES += \
     $(TOPDIR)frameworks/av/include
